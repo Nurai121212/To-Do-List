@@ -6,12 +6,11 @@ $(document).ready(function(){
     if(!taskInput.val()){return false}
     taskList.append(`<li><p class="task-text"> ${taskInput.val()}</p><button class="delete">delete</button></li>`);
     taskInput.val('');
-    taskInput.blur(function(){
-      $('.footer').removeClass("focus");
-    })
+    $('.footer').removeClass("focus");
 
     $('.delete').on('click', function(){
-      $(this).parent().remove();
+      let parent = $(this).parent();
+      parent.fadeOut('fast');
     })
   });
   taskInput.focus(function() {
