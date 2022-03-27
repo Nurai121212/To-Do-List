@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap')
+
+$clr1 : #222222
+$clr2: #3f3e3e
+$clr3: #f12828
+$clr4: #F4F4F4
+$clr5: #fff
+
+@mixin placeholder()
+    &::-webkit-input-placeholder
+        color: #ccc
+        font-size: 20px
+        line-height: 21px
+    &:-moz-placeholder
+        color: #ccc
+        font-size: 20px
+        line-height: 21px
+    &::-moz-placeholder
+        color: #ccc
+        font-size: 20px
+        line-height: 21px
+    &:-ms-input-placeholder
+        color: #ccc
+        font-size: 20px
+        line-height: 21px  
+    &::-webkit-input-placeholder
+        color: #ccc
+        font-size: 20px
+        line-height: 21px
+
+@mixin scrollbars($size, $foreground-color, $background-color)
+    &::-webkit-scrollbar 
+        width:  $size
+        height: $size
+    &::-webkit-scrollbar-thumb 
+        background: $foreground-color
+        border-radius: 10px
+    &::-webkit-scrollbar-track 
+        background: $background-color
+    & 
+        scrollbar-face-color: $foreground-color
+        scrollbar-track-color: $background-color
+
+@mixin aboutText($size, $height, $color, $weight: 400)
+  font-size: $size
+  line-height: $height
+  color: $color
+  font-weight: $weight
+
+@mixin flex-type($justify, $align, $direction)
+  display: flex
+  justify-content: $justify
+  align-items: $align
+  flex-direction: $direction
+
+
+@import '_main'
+@import '_normalize'
