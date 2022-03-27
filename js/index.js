@@ -20,9 +20,11 @@ $(document).ready(function(){
 
     $('.delete').on('click', function(){
       let parent = $(this).parent();
-      parent.fadeOut('fast').remove();
+      parent.fadeOut('fast', function(){
+        parent.remove();
 
-      displayNotification();
+        displayNotification();
+      });
     })
   });
 
