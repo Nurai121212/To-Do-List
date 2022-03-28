@@ -28,7 +28,7 @@ $(document).ready(function(){
     })
   });
 
-  taskInput.focus(function() {
+  taskInput.focusin(function(e) {
     $('.footer').addClass("focus");
   })
 })
