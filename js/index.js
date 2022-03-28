@@ -3,7 +3,7 @@ let taskInput = $('.task-input');
 let notification = $('.notification');
 
 
-$(document).ready(function(){
+$(document).ready(function(e){
   function displayNotification(){
     if(!taskList.children().length){
       notification.fadeIn('fast');
@@ -11,6 +11,14 @@ $(document).ready(function(){
       notification.css('display','none');
     }
   };
+
+  taskInput.focus(function(e) {
+    $('.footer').addClass("focus");
+  }).blur(function(){
+    if(taskInput.val()){return false}
+    $('.footer').removeClass("focus");
+  });
+
   $('.task-add').on('click', function(e){
     if(!taskInput.val()){return false}
     taskList.append(`<li><p class="task-text"> ${taskInput.val()}</p><button class="delete">delete</button></li>`);
@@ -27,10 +35,6 @@ $(document).ready(function(){
       });
     })
   });
-
-  taskInput.focusin(function(e) {
-    $('.footer').addClass("focus");
-  })
 })
 
 
