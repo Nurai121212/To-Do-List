@@ -7,12 +7,12 @@
     padding: 13px 30px 0 30px
 
 body
-    @include flex-type(center, none, none)
+    @include flex-type(center, center, none)
 
 .title
     @include aboutText(36px, 42px, $clr5, 700)
 .main
-    margin-top: 10px
+    margin-top: 25px
     height: 700px - 185px
     @include flex-type(none, none, column)
 
@@ -26,7 +26,7 @@ body
     @include scrollbars(15px, $clr2, transparent)
     @include flex-type(space-between, none, column)
     padding-right: 15px 
-    gap: 15px
+    gap: 12px
     li
         width: 100%
         height: 100%
@@ -51,8 +51,8 @@ body
                 background: #366EFF
 
 .notification
-    @include flex-type(center, center, none)
-    @include aboutText(24px, 36px, $clr2, 500)
+    margin: auto auto
+    @include aboutText(28px, 36px, $clr2, 500)
 
 .footer
     position: absolute
