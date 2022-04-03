@@ -1,9 +1,8 @@
 let taskList = $('.task-list');
 let taskInput = $('.task-input');
 let notification = $('.notification');
-
-
-$(document).ready(function(e){
+let tasks = [];
+$(document).ready(function(){
   function displayNotification(){
     if(!taskList.children().length){
       notification.fadeIn('fast');
@@ -19,22 +18,52 @@ $(document).ready(function(e){
     $('.footer').removeClass("focus");
   });
 
+  if(localStorage.length != 0 ){
+    for(let i = 0; i < localStorage.length; i++){
+      tasks.push( JSON.parse(localStorage.getItem(localStorage.key(i))));
+    }
+    for(let key in tasks){
+      createTask(tasks[key])
+    }
+  }
+
+  function createTask(item){
+    $( "<li></li>" )
+    .addClass( "my-div" )
+    .attr('id', item.taskId)
+    .append([
+      $('<p></p>').addClass('task-text').text(item.task), 
+      $('<button></button>').addClass('delete').text('delete').on('click', function(){
+        let parent = $(this).parent();removeTask(parent)
+      })])
+    .appendTo( taskList);
+    displayNotification();
+  }
+
+  function removeTask(item){
+    item.fadeOut('fast', function(){
+      item.remove();
+      displayNotification();
+      localStorage.removeItem($(item).attr('id'));
+    })
+  }
+
   $('.task-add').on('click', function(e){
     if(!taskInput.val()){return false}
-    taskList.append(`<li><p class="task-text"> ${taskInput.val()}</p><button class="delete">delete</button></li>`);
+
+    let task = {
+      task: taskInput.val(),
+      taskId: doId()
+    };
+
+    tasks.push(task);
+    createTask(task)
     taskInput.val('');
-    displayNotification();
     $('.footer').removeClass("focus");
-
-    $('.delete').on('click', function(){
-      let parent = $(this).parent();
-      parent.fadeOut('fast', function(){
-        parent.remove();
-
-        displayNotification();
-      });
-    })
+    localStorage.setItem(task.taskId, JSON.stringify(task))
   });
+
+  function doId() {
+    return Math.random().toString(36).substr(2, 16);
+  }
 })
-
-
