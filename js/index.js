@@ -38,6 +38,7 @@ $(document).ready(function(){
       })])
     .appendTo( taskList);
     displayNotification();
+    localStorage.setItem(item.taskId, JSON.stringify(item))
   }
 
   function removeTask(item){
@@ -60,7 +61,8 @@ $(document).ready(function(){
     createTask(task)
     taskInput.val('');
     $('.footer').removeClass("focus");
-    localStorage.setItem(task.taskId, JSON.stringify(task))
+
+    
   });
 
   function doId() {
