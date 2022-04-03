@@ -2,6 +2,7 @@ let taskList = $('.task-list');
 let taskInput = $('.task-input');
 let notification = $('.notification');
 let tasks = [];
+
 $(document).ready(function(){
   function displayNotification(){
     if(!taskList.children().length){
@@ -54,7 +55,7 @@ $(document).ready(function(){
     return `task ${Math.random().toString(36).substr(2, 16)}`;
   }
   $('.task-add').on('click', function(e){
-    if(!taskInput.val()){return false}
+    if(!taskInput.val() || !(/[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]/gu).test(taskInput.val())){return false}
     let task = {
       task: taskInput.val(),
       taskId: doId()
