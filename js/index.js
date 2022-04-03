@@ -20,7 +20,9 @@ $(document).ready(function(){
 
   if(localStorage.length != 0 ){
     for(let i = 0; i < localStorage.length; i++){
-      tasks.push( JSON.parse(localStorage.getItem(localStorage.key(i))));
+      if(localStorage.key(i).includes('task')){
+        tasks.push( JSON.parse(localStorage.getItem(localStorage.key(i))));
+      }
     }
     for(let key in tasks){
       createTask(tasks[key])
@@ -28,17 +30,16 @@ $(document).ready(function(){
   }
 
   function createTask(item){
-    $( "<li></li>" )
+    localStorage.setItem(item.taskId, JSON.stringify(item))
+    taskList.append($( "<li></li>" )
     .addClass( "my-div" )
     .attr('id', item.taskId)
     .append([
       $('<p></p>').addClass('task-text').text(item.task), 
       $('<button></button>').addClass('delete').text('delete').on('click', function(){
         let parent = $(this).parent();removeTask(parent)
-      })])
-    .appendTo( taskList);
+      })]));
     displayNotification();
-    localStorage.setItem(item.taskId, JSON.stringify(item))
   }
 
   function removeTask(item){
@@ -49,23 +50,17 @@ $(document).ready(function(){
     })
   }
 
+  function doId() {
+    return `task ${Math.random().toString(36).substr(2, 16)}`;
+  }
   $('.task-add').on('click', function(e){
     if(!taskInput.val()){return false}
-
     let task = {
       task: taskInput.val(),
       taskId: doId()
     };
-
-    tasks.push(task);
     createTask(task)
     taskInput.val('');
     $('.footer').removeClass("focus");
-
-    
   });
-
-  function doId() {
-    return Math.random().toString(36).substr(2, 16);
-  }
 })
