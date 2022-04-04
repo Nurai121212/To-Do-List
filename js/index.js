@@ -1,7 +1,6 @@
 let taskList = $('.task-list');
 let taskInput = $('.task-input');
 let notification = $('.notification');
-let tasks = [];
 
 $(document).ready(function(){
   function displayNotification(){
@@ -22,11 +21,8 @@ $(document).ready(function(){
   if(localStorage.length != 0 ){
     for(let i = 0; i < localStorage.length; i++){
       if(localStorage.key(i).includes('task')){
-        tasks.push( JSON.parse(localStorage.getItem(localStorage.key(i))));
+        createTask(JSON.parse(localStorage.getItem(localStorage.key(i))));
       }
-    }
-    for(let key in tasks){
-      createTask(tasks[key])
     }
   }
 
